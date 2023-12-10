@@ -138,5 +138,5 @@ begin
     writeln(f); 
 
     close(f);
-    writeln('File telah berhasil dibuat. File disimpan dengan nama:  ',filename);
+    writeln('File telah berhasil dibuat dengan nama:  ',filename);
 end.
