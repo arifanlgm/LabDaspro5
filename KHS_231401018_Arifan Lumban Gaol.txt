@@ -1,0 +1,22 @@
+Kartu Hasil Studi
+=================
+
+Nama   : Arifan Lumban Gaol
+NIM    : 231401018
+
+|==========================================|
+|No.|Matkul                          |Nilai|
+|==========================================|
+|1. |Matematika Dasar                |A    |    
+|2. |Pengantar Ilmu Komputer         |A    |    
+|3. |Praktikum Dasar Pemrograman     |A    |    
+|4. |Organisasi Arsitektur Komputer  |A    |    
+|5. |Dasar Pemrograman               |A    |    
+|6. |Logika Matematika               |A    |    
+|7. |Pendidikan Bahasa Indonesia     |A    |    
+|8. |Pendidikan Pancasil             |A    |    
+|==========================================|
+
+Total SKS  : 19
+IP Semester: 4.00
+
