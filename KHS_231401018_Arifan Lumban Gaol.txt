@@ -12,11 +12,11 @@ NIM    : 231401018
 |3. |Praktikum Dasar Pemrograman     |A    |    
 |4. |Organisasi Arsitektur Komputer  |A    |    
 |5. |Dasar Pemrograman               |A    |    
-|6. |Logika Matematika               |A    |    
-|7. |Pendidikan Bahasa Indonesia     |A    |    
-|8. |Pendidikan Pancasil             |A    |    
+|6. |Logika Matematika               |B+    |   
+|7. |Pendidikan Pancasila            |A    |    
+|8. |Pendidikan Bahasa Indonesia     |B    |    
 |==========================================|
 
 Total SKS  : 19
-IP Semester: 4.00
+IP Semester: 3.82
 

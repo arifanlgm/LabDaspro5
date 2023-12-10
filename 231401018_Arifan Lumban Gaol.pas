@@ -1,142 +1,140 @@
-program TugasDuaLD;
 uses crt, SysUtils;
 
 type 
     mahasiswa = record
-        nama    : string;
-        nim     : string[9];
-        hnilai  : string[2];
-        tnilai  : real;
-        ip      : real;
+        nama : string;
+        nim : string[9];
+        sebutanNilai : string[2];
+        tnilai : real;
+        ip : real;
     end;
 
     matkul = record
-        namkul  : string;
-        sks     : byte;
+        namatkul : string;
+        sks : byte;
     end;
 
 var
-    f: textfile;
+    txt: textfile;
     filename: string; 
-    i, j, banyak_matkul: integer; 
+    i, j, jmlhMatkul: integer; 
     var_mahasiswa : mahasiswa;
     var_matkul: array [1..20] of matkul;
-    total_sks: integer;
+    jmlhSKS: integer;
     nilai_matkul: array [1..20] of string; 
 
-procedure garis_display;
+procedure lineSatu;
 begin
-    writeln(f, '=================');
+    writeln(txt, '=================');
 end;
 
-procedure garis;
+procedure lineDua;
 begin
     writeln('=================');
 end;
 
-procedure garis2_display;
+procedure lineTiga;
 begin
-    writeln(f, '|==========================================|');
+    writeln(txt, '|==========================================|');
 end;
 
-function KonversiNilai(hnilai: string): real;
+function konversiABC(sebutanNilai: string): real;
 begin
-    case hnilai of
-        'A' : KonversiNilai := 4.0;
-        'B+' : KonversiNilai := 3.5;
-        'B' : KonversiNilai := 3.0;
-        'C+' : KonversiNilai := 2.5;
-        'C' : KonversiNilai := 2.0;
-        'D' : KonversiNilai := 1.0;
-        'E' : KonversiNilai := 0.0;
+    case sebutanNilai of
+        'A': konversiABC := 4.0;
+        'B+': konversiABC := 3.5;
+        'B': konversiABC := 3.0;
+        'C+': konversiABC := 2.5;
+        'C': konversiABC := 2.0;
+        'D': konversiABC := 1.0;
+        'E': konversiABC := 0.0;
     else
         begin
-            writeln('Error: nilai tidak valid');
-            KonversiNilai := 0.0;
+            writeln('Salah memasukkan nilai!');
+            konversiABC := 0.0;
         end;
     end;
 end;
 
 begin
     clrscr;
-    write('Banyak Matkul: ');
-    readln(banyak_matkul);
-    total_sks := 0;
-
-
-    for i := 1 to banyak_matkul do 
+    write('Jumlah Matkul: ');
+    readln(jmlhMatkul);
+    jmlhSKS := 0;
+    for i := 1 to jmlhMatkul do 
     begin
         clrscr;
         with var_matkul[i] do 
         begin
             writeln('Matkul [', i, ']');
-            garis;
+            lineDua;
             write('Nama Matkul : ');
-            readln(namkul);
+            readln(namatkul);
             write('SKS         : ');
             readln(sks);
-            total_sks := total_sks + sks;
+            jmlhSKS := jmlhSKS + sks;
         end;
     end;
-
+     
     with var_mahasiswa do 
     begin
         clrscr;
         writeln('Mahasiswa');
-        garis;
+        lineDua;
         writeln;
         write('Nama : ');
         readln(nama);
         write('NIM  : ');
         readln(nim);
     end;
-
+    
     var_mahasiswa.tnilai := 0;
 
-    for j := 1 to banyak_matkul do
+    for j := 1 to jmlhMatkul do
     begin
-        write('Nilai ', var_matkul[j].namkul, ': ');
+        write('Nilai ', var_matkul[j].namatkul, ': ');
         readln(nilai_matkul[j]); 
-        var_mahasiswa.tnilai := var_mahasiswa.tnilai + (KonversiNilai(nilai_matkul[j]) * var_matkul[j].sks);
+        var_mahasiswa.tnilai := var_mahasiswa.tnilai + (konversiABC(nilai_matkul[j]) * var_matkul[j].sks);
     end;  
 
-    var_mahasiswa.ip := var_mahasiswa.tnilai / total_sks;
+    var_mahasiswa.ip := var_mahasiswa.tnilai / jmlhSKS;
 
     filename := 'KHS_' + var_mahasiswa.nim + '_' + var_mahasiswa.nama + '.txt';
-    Assign(f, filename);
+    Assign(txt, filename);
 
-    rewrite(f); 
+    rewrite(txt); 
 
-    writeln(f, 'Kartu Hasil Studi');
-    garis_display;
-    writeln(f);
+    writeln(txt, 'Kartu Hasil Studi');
+    lineSatu;
+    writeln(txt);
     with var_mahasiswa do 
     begin
-        writeln(f, 'Nama   : ', nama);
-        writeln(f, 'NIM    : ', nim);
+        writeln(txt, 'Nama   : ', nama);
+        writeln(txt, 'NIM    : ', nim);
     end;
-    writeln(f);
-    garis2_display;
-    writeln(f, '|No.|Matkul                          |Nilai|');
-    garis2_display;
-    for i := 1 to banyak_matkul do
+    writeln(txt);
+    lineTiga;
+    writeln(txt, '|No.|Matkul                          |Nilai|');
+    lineTiga;
+    for i := 1 to jmlhMatkul do
     with var_matkul[i] do 
     begin
-        write(f, '|',i , '. |', namkul);
-        for j := 1 to (32 - length(namkul)) do
-            write(f, ' ');
-        write(f, '|', nilai_matkul[i],'    |');
+        write(txt, '|',i , '. |', namatkul);
+        for j := 1 to (32 - length(namatkul)) do
+            write(txt, ' ');
+        write(txt, '|', nilai_matkul[i],'    |');
         for j := 1 to (5 - length(nilai_matkul[i])) do
-            write(f, ' ');
-        writeln(f);
+            write(txt, ' ');
+        writeln(txt);
     end;
-    garis2_display;
-    writeln(f);
-    writeln(f, 'Total SKS  : ', total_sks);
-    writeln(f, 'IP Semester: ', var_mahasiswa.ip:0:2);
+    lineTiga;
+    writeln(txt);
+    writeln(txt, 'Total SKS  : ', jmlhSKS);
+    writeln(txt, 'IP Semester: ', var_mahasiswa.ip:0:2);
 
-    writeln(f); 
+    writeln(txt); 
 
-    close(f);
-    writeln('File telah berhasil dibuat dengan nama:  ',filename);
+    close(txt);
+    writeln('File .txt telah dibuat!');
+
 end.
